@@ -16,6 +16,7 @@ This project visualizes USGS's earthquake data. They collect a massive amount of
     - D3.js
     - Leaflet
   * CSS
+  * GeoJSON
 
 ---
 
