@@ -11,3 +11,8 @@ function getColor(magnitude) {
         magnitude >= 1 ? '#fed976' :
         '#ffffb2';
 }
+
+// Returns radius based on magnitude
+function getRadius(magnitude) {
+    return magnitude * 3;
+}
