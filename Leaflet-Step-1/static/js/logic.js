@@ -2,7 +2,7 @@
  * USER DEFINED FUNCTIONS
  *******************************/
 
-// Returns color based on magtitude 
+// Returns color based on magnitude 
 function getColor(magnitude) {
     return magnitude >= 5 ? '#bd0026' :
         magnitude >= 4 ? '#f03b20' :
