@@ -29,3 +29,61 @@ function getEarthquakeData() {
         createMap(earthquakeData.features);
     });
 }
+
+// Creates map with earthquake data
+function createMap(earthquakes) {
+
+    // Defining information to be displayed on clicking the markers on the map
+    function onEachFeature(feature, layer) {
+        layer.bindPopup("<h2>Magnitude:" + feature.properties.mag + "</h2><h3>" + feature.properties.place +
+            "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+    }
+
+    // Create a map object
+    var myMap = L.map("map", {
+        center: [15.5994, -28.6731],
+        zoom: 2
+    });
+
+    L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+        tileSize: 512,
+        maxZoom: 20,
+        zoomOffset: -1,
+        id: "mapbox/streets-v11",
+        accessToken: API_KEY
+    }).addTo(myMap);
+
+    // Creating a GeoJSON layer with the retrieved data
+    L.geoJSON(earthquakes, {
+        pointToLayer: function(feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: getRadius(feature.properties.mag),
+                fillColor: getColor(feature.properties.mag),
+                color: "black",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 1
+            });
+        },
+        onEachFeature: onEachFeature
+    }).addTo(myMap);
+
+    // Display legend at bottom right corner of the map
+    var legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function(myMap) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+            mags = [0, 1, 2, 3, 4, 5];
+
+        // loop through magnitude intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < mags.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + getColor(mags[i]) + '"></i> ' +
+                mags[i] + (mags[i + 1] ? '&ndash;' + mags[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+    legend.addTo(myMap);
+}
