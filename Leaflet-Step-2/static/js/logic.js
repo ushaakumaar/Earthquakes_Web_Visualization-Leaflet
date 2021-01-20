@@ -140,3 +140,9 @@ function createMap(earthquakes, faultlineData) {
     };
     legend.addTo(myMap);
 }
+
+/*******************************
+ * ON PAGE LOAD
+ *******************************/
+
+getEarthquakeData();
