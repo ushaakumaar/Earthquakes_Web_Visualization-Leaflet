@@ -87,3 +87,9 @@ function createMap(earthquakes) {
     };
     legend.addTo(myMap);
 }
+
+/*******************************
+ * ON PAGE LOAD
+ *******************************/
+
+getEarthquakeData();
