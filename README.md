@@ -22,4 +22,4 @@ This project visualizes USGS's earthquake data. They collect a massive amount of
 
 ## Contributors
 
-- Usha Saravanakumar ([ushaakumaar](https://github.com/ushaakumaar))
+- Usha Saravanakumar (ushaakumaar@gmail.com)
